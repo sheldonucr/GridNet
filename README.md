@@ -15,6 +15,7 @@ GridNet is a GAN-based IRDrop prediction tool for power grid
 
 GridNet requires TensorFlow 1.x to be installed as backend. It was tested on Fermi server in Anaconda virtual env with following dependencies:
 
+- python=3.7.3
 - tensorflow-gpu=1.14.0
 - cudatoolkit=10.1.168
 - numpy
