@@ -44,6 +44,13 @@ Set `--is-gradient` will enable the sensitivity(gradient) calculation. A .csv fi
 $ python gridnet.py --input-imgsize 32 --input-channel 4 --is-inference --ckpt-file /fermi_data/wjin/GridNet/Samples/GridNet_Train_Size_32_20211013164554/checkpoints/GridNet.ckpt-99 --test-csv /fermi_data/wjin/GridNet/Samples/GridNet_Train_Size_32_20211013164554/test_data.csv --save-output-csv --is-gradient --grad-node-list ./sensitivity.csv
 ```
 
+## Note
+To run the old version used in original Gridnet ICCAD'20 paper, please checkout the old eb1fc20 version using:
+```
+git checkout eb1fc208a6f7f3449fd86271997d03bf2b94609c
+```
+The old version could support only one current source while the later versions (starting from `c9c78da9c93e9f0a0e641d5db0b515300f87e392`) support a curernt source grid.
+
 ## Publications
 
 ```
