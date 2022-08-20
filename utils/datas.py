@@ -9,20 +9,19 @@ import math
 def get_resist(data_path, size):
     resist = np.zeros([size, size, 4])
 
-    # typical data_path: r6_2_10_0.000750898 
-    time = data_path[:data_path.rfind('_')]
-    time = time[time.rfind('_')+1:]
+    # typical data_path: r6_2_10
+    time = data_path[data_path.rfind('_')+1:-4]
     time = int(time) / 10
     time = time * np.ones([size,size])
 
-    current = re.findall('0\.[0-9]+',data_path)[0]
-    current = float(current)
-    current = (current-5e-5)/(20e-5-5e-5) # convert current to [0 1]
-    current = 2 * current - 1 # convert x to [-1 1]
-    current = current * np.ones([size,size])
+    current_path = data_path[:data_path.rfind('r')]+'i'+data_path[data_path.rfind('r')+1:data_path.rfind('_')]+'_0.txt' # replace r with i, replace time with 0
+    current = np.genfromtxt(current_path, dtype=np.float64)[:size*size]
+    current = (current-0)/(70e-5-0) # convert current to [0 1]
+    current = 2 * current - 1 # convert y to [-1 1]
+    current = np.transpose(current.reshape([size,size]))
 
     x = np.genfromtxt(data_path, dtype=np.float64)
-    x = (x-0.2)/(0.6-0.2) # convert x from [0.2 0.6] to [0 1]
+    x = (x-0.1)/(1.0-0.1) # convert x from [0.1 1.0] to [0 1]
     x = 2 * x - 1 # convert x to [-1 1]
     x_col = np.transpose(x[:(size-1)*size].reshape([size,(size-1)])) # 127 x 128, col resistor matrix
     x_row = x[size*(size-1):].reshape([size,(size-1)]) # 128 x 127, row resistor matrix
@@ -37,7 +36,7 @@ def get_resist(data_path, size):
 # nodal voltage bz x 128 x 128 x 1
 def get_voltage(data_path, size):
     
-    data_path = data_path[:data_path.rfind('_')]+'.txt' # remove current value 
+    # data_path = data_path[:data_path.rfind('_')]+'.txt' # remove current value 
     data_path = data_path[:data_path.rfind('r')]+'v'+data_path[data_path.rfind('r')+1:] # replace r with v
 
     voltage = np.zeros([size, size, 1])
