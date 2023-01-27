@@ -1,6 +1,6 @@
 # GridNet
 
-GridNet is a GAN-based IRDrop prediction tool for power grid
+GridNet is a GAN-based  IR Drop Analysis Tool for On-Chip Power Grid Networks
 
 - Input: image-like multi-channel tensor, e.g. 4-channel input consisting column resistance, row resistance, current source and time.
 - Output: single-channel IRDrop map with the same size of input.
